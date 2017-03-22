@@ -1,0 +1,11 @@
+portfolio_index:
+    path:     /
+    defaults: { _controller: PortfolioBundle:Portfolio:index }
+
+portfolio_aff_port:
+    path: /port/{id}
+    defaults: { _controller: PortfolioBundle:Portfolio:afficherUnPort, id: 1 }
+    requirements:
+            id: \d+
+
+

@@ -1,0 +1,346 @@
+<?php
+
+namespace PortfolioBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Projet
+ *
+ * @ORM\Table(name="projet")
+ * @ORM\Entity(repositoryClass="PortfolioBundle\Repository\ProjetRepository")
+ */
+class Projet
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=50)
+     */
+    private $titre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=5000)
+     */
+    private $description;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateDebut", type="datetime")
+     */
+    private $dateDebut;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateFin", type="datetime")
+     */
+    private $dateFin;
+
+    /**
+     * @ORM\OneToOne(targetEntity="PortfolioBundle\Entity\Image", cascade={"persist"})
+     */
+    private $image;
+
+    /**
+     * @var \string
+     *
+     * @ORM\Column(name="urlImageBase", type="string")
+     */
+    private $urlImageBase;
+
+    /**
+     * @var \string
+     *
+     * @ORM\Column(name="miniDescription", type="string")
+     */
+    private $miniDescription;
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="PortfolioBundle\Entity\Referent", cascade={"persist"})
+     */
+    private $referents;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="PortfolioBundle\Entity\Outil", cascade={"persist"})
+     */
+    private $outils;
+
+
+
+    public function __toString() {
+        return $this->titre;
+    }
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     *
+     * @return Projet
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Projet
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set dateDebut
+     *
+     * @param \DateTime $dateDebut
+     *
+     * @return Projet
+     */
+    public function setDateDebut($dateDebut)
+    {
+        $this->dateDebut = $dateDebut;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDebut
+     *
+     * @return \DateTime
+     */
+    public function getDateDebut()
+    {
+        return $this->dateDebut;
+    }
+
+    /**
+     * Set dateFin
+     *
+     * @param \DateTime $dateFin
+     *
+     * @return Projet
+     */
+    public function setDateFin($dateFin)
+    {
+        $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    /**
+     * Get dateFin
+     *
+     * @return \DateTime
+     */
+    public function getDateFin()
+    {
+        return $this->dateFin;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \PortfolioBundle\Entity\Image $image
+     *
+     * @return Projet
+     */
+    public function setImage(\PortfolioBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \PortfolioBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->referents = new ArrayCollection();
+        $this->outils = new ArrayCollection();
+    }
+
+    /**
+     * Add referent
+     *
+     * @param \PortfolioBundle\Entity\Referent $referent
+     *
+     * @return Projet
+     */
+    public function addReferent(\PortfolioBundle\Entity\Referent $referent)
+    {
+        $this->referents[] = $referent;
+
+        return $this;
+    }
+
+    /**
+     * Remove referent
+     *
+     * @param \PortfolioBundle\Entity\Referent $referent
+     */
+    public function removeReferent(\PortfolioBundle\Entity\Referent $referent)
+    {
+        $this->referents->removeElement($referent);
+    }
+
+    /**
+     * Get referents
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReferents()
+    {
+        return $this->referents;
+    }
+
+    /**
+     * Add outil
+     *
+     * @param \PortfolioBundle\Entity\Outil $outil
+     *
+     * @return Projet
+     */
+    public function addOutil(\PortfolioBundle\Entity\Outil $outil)
+    {
+        $this->outils[] = $outil;
+
+        return $this;
+    }
+
+    /**
+     * Remove outil
+     *
+     * @param \PortfolioBundle\Entity\Outil $outil
+     */
+    public function removeOutil(\PortfolioBundle\Entity\Outil $outil)
+    {
+        $this->outils->removeElement($outil);
+    }
+
+    /**
+     * Get outils
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOutils()
+    {
+        return $this->outils;
+    }
+
+
+
+
+    /**
+     * Set urlImageBase
+     *
+     * @param string $urlImageBase
+     *
+     * @return Projet
+     */
+    public function setUrlImageBase($urlImageBase)
+    {
+        $this->urlImageBase = $urlImageBase;
+
+        return $this;
+    }
+
+    /**
+     * Get urlImageBase
+     *
+     * @return string
+     */
+    public function getUrlImageBase()
+    {
+        return $this->urlImageBase;
+    }
+
+    /**
+     * Set miniDescription
+     *
+     * @param string $miniDescription
+     *
+     * @return Projet
+     */
+    public function setMiniDescription($miniDescription)
+    {
+        $this->miniDescription = $miniDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get miniDescription
+     *
+     * @return string
+     */
+    public function getMiniDescription()
+    {
+        return $this->miniDescription;
+    }
+}

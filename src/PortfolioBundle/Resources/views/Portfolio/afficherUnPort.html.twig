@@ -1,0 +1,91 @@
+{% extends "PortfolioBundle::layoutPort.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - Consultation d'une pharmacie
+{% endblock %}
+
+
+{% block body %}
+
+<!-- ==========================
+    HEADER - START
+=========================== -->
+<section id="blog-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-xs-6">
+                <a href="{{ path('portfolio_index') }}"><i class="fa fa-arrow-left arrow-left"></i> HOME</a>
+            </div>
+
+            <div class="col-sm-4">
+            </div>
+
+            <div class="col-sm-4 col-xs-6">
+                <div class="blog-header-menu-right">
+                    <a href="{{ path('portfolio_aff_port', {'id': unProjet.id + 1}) }}">NEXT WORK <i class="fa fa-arrow-right arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================
+   PORTFOLIO  - START
+=========================== -->
+<section id="portfolio-page-content">
+    <div class="container">
+        <div class="row">
+            <h2>Work no.{{ unProjet.id }}</h2>
+            <div class="col-lg-6 col-sm-8 col-md-8 col-md-offset-2 col-sm-offset-2 col-lg-offset-3 showcase-carousel  scrollpoint sp-effect2">
+                <img src="{{ asset('image/imac.png') }}" class="img-responsive hidden-xs" alt="">
+
+                <div id="carousel-reference" class="carousel slide" data-ride="carousel">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active"><img src="{{ unProjet.getImage().url }}" alt=""  width="1200" height="675"></div>
+                    </div>
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-reference" data-slide="prev"><i class="fa fa-arrow-left"></i></a>
+                    <a class="right carousel-control" href="#carousel-reference" data-slide="next"><i class="fa fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="portfolio-text">
+                <h3>Work Period:</h3>
+                <p>{{ unProjet.dateDebut|date("m/d/Y") }} - {{ unProjet.dateFin|date("m/d/Y") }}</p>
+                <h3>Tools Used:</h3>
+                <ul>
+                {% for tools in unProjet.getOutils() %}
+                <li>{{ tools.libelle }}</li>
+                {% else %}
+                    <li>Pas d'outil</li>
+                {% endfor %}
+                </ul>
+                {% if unProjet.getReferents() == null %}
+                {% else %}
+                    {% for referents in unProjet.getReferents() %}
+                    <h3>Referent</h3>
+                    <p>{{ referents.prenom }} {{ referents.nom }}  - {{ referents.poste }} </p>
+                    {% endfor %}
+                {% endif%}
+                <h3>Description:</h3>
+                <p>{{ unProjet.description }}</p>
+
+            </div>
+            {% if lesDocuments == null %}
+            {% else %}
+                {% for doc in lesDocuments %}
+                    <a href="{{ doc.url }}"><button type="button" class="btn btn-danger">{{ doc.libelle }}</button></a>
+                {% endfor %}
+            {% endif%}
+
+
+        </div>
+    </div>
+
+    </div>
+</section>
+
+    {% endblock %}

@@ -1,0 +1,59 @@
+{% extends "PortfolioBundle::layout.html.twig" %}
+
+
+{% block portfolio %}
+
+<!-- ==========================
+  MY WORK - START GROSSE BOUCLE ICI
+=========================== -->
+<section id="reference" class="content-second">
+    <h2 class="scrollpoint sp-effect3">My Works</h2>
+    <p class="scrollpoint sp-effect3"></p>
+    <ul class="grid cs-style-4">
+    {% for projet in lesProjets %}
+        <li>
+            <figure class="scrollpoint sp-effect1">
+                <div><img src="{{ projet.urlImageBase }}" alt="img04"></div>
+                <figcaption>
+                    <h3>{{ projet.Titre }}</h3>
+                    <p>{{ projet.miniDescription }}</p>
+                    <a href="{{ path('portfolio_aff_port', {'id': projet.id}) }}">Show me</a>
+                </figcaption>
+            </figure>
+        </li>
+    {% else %}
+        <li>Pas de projet</li>
+    {% endfor %}
+    </ul>
+
+</section>
+<!-- ==========================
+  MY WORKS - END
+=========================== -->
+
+{% endblock %}
+{% block quotes %}
+
+
+<!-- ==========================
+    	QUOTES - START
+    =========================== -->
+<section id="quotes" class="content-first">
+    <div class="container">
+        <div class="row scrollpoint sp-effect3">
+            {% for quote in lesQuotes %}
+                {% if quote.id == randomQuoteNumber %}
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <blockquote class="blockquote-reverse">
+                            <p><i class="fa fa-quote-left"></i> {{ quote.quote }}</p>
+                            <footer> {{ quote.auteur }}</footer>
+                        </blockquote>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <i class="fa fa-cog fa-5x fa-spin"></i>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
