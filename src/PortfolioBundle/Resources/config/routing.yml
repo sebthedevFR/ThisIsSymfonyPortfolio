@@ -8,4 +8,7 @@ portfolio_aff_port:
     requirements:
             id: \d+
 
+portfolio_login:
+    path:     /login
+    defaults: { _controller: PortfolioBundle:Security:login }
 

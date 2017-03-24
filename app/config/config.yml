@@ -79,7 +79,10 @@ easy_admin:
         - PortfolioBundle\Entity\Image
         - PortfolioBundle\Entity\Document
         - PortfolioBundle\Entity\Quotes
+        - PortfolioBundle\Entity\Message
     site_name: 'Sebastien Toursel'
+    formats:
+            datetime: 'd/m/Y h:i A e'
     design:
             # 'dark' is the default value
             color_scheme: 'light'
@@ -89,5 +92,6 @@ easy_admin:
                 - { name: 'show', icon: 'search', label: ''  }
                 - { name: 'edit', icon: 'pencil', label: ''  }
                 - { name: 'delete', icon: 'remove', label: ''  }
+
 
 
